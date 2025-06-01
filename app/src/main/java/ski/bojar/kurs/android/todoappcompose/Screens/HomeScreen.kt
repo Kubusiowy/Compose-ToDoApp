@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -48,21 +51,40 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                     )
                 )
                 {
-                    Column(Modifier.fillMaxSize().padding(10.dp))
+                    Row(modifier = Modifier.fillMaxSize())
                     {
-                        Text(text = item.title, color = if(item.color.color == Color.Red ||
-                            item.color.color == Color.Red ||
-                            item.color.color == Color.Blue ||
-                            item.color.color == Color.Magenta ||
-                            item.color.color == Color.Black
-                            ) Color.White else Color.Black,fontSize = 22.sp, modifier = Modifier)
-                        Spacer(Modifier.height(10.dp))
-                        Text(text = item.description, color = if(item.color.color == Color.Red ||
-                            item.color.color == Color.Red ||
-                            item.color.color == Color.Blue ||
-                            item.color.color == Color.Magenta ||
-                            item.color.color == Color.Black
-                        ) Color.White else Color.Black,fontSize = 14.sp, modifier = Modifier)
+                        Column(Modifier.fillMaxSize().padding(10.dp).weight(1f))
+                        {
+                            Text(
+                                text = item.title,
+                                color = if (item.color.color == Color.Red ||
+                                    item.color.color == Color.Red ||
+                                    item.color.color == Color.Blue ||
+                                    item.color.color == Color.Magenta ||
+                                    item.color.color == Color.Black
+                                ) Color.LightGray else Color.Black,
+                                fontSize = 22.sp,
+                                modifier = Modifier
+                            )
+                            Spacer(Modifier.height(10.dp))
+                            Text(
+                                text = item.description,
+                                color = if (item.color.color == Color.Red ||
+                                    item.color.color == Color.Red ||
+                                    item.color.color == Color.Blue ||
+                                    item.color.color == Color.Magenta ||
+                                    item.color.color == Color.Black
+                                ) Color.LightGray else Color.Black,
+                                fontSize = 14.sp,
+                                modifier = Modifier
+                            )
+                        }
+                        Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",
+                            modifier = Modifier.clickable {
+                                viewModel.removeTodo(item.id)
+                            }
+                            )
+
                     }
                 }
 
