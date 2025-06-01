@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -35,7 +36,7 @@ import ski.bojar.kurs.android.todoappcompose.data.ToDoViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
-
+        Text(text = "Ilosc zadan: ${viewModel.todos.size}")
         LazyColumn(modifier = Modifier.fillMaxSize().padding(15.dp))
         {
             items(viewModel.todos){item->
@@ -47,7 +48,22 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                     )
                 )
                 {
-
+                    Column(Modifier.fillMaxSize().padding(10.dp))
+                    {
+                        Text(text = item.title, color = if(item.color.color == Color.Red ||
+                            item.color.color == Color.Red ||
+                            item.color.color == Color.Blue ||
+                            item.color.color == Color.Magenta ||
+                            item.color.color == Color.Black
+                            ) Color.White else Color.Black,fontSize = 22.sp, modifier = Modifier)
+                        Spacer(Modifier.height(10.dp))
+                        Text(text = item.description, color = if(item.color.color == Color.Red ||
+                            item.color.color == Color.Red ||
+                            item.color.color == Color.Blue ||
+                            item.color.color == Color.Magenta ||
+                            item.color.color == Color.Black
+                        ) Color.White else Color.Black,fontSize = 14.sp, modifier = Modifier)
+                    }
                 }
 
             }
