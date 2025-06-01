@@ -51,7 +51,10 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                     )
                 )
                 {
-                    Row(modifier = Modifier.fillMaxSize())
+                    Row(modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                        )
                     {
                         Column(Modifier.fillMaxSize().padding(10.dp).weight(1f))
                         {
@@ -82,7 +85,7 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                         Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",
                             modifier = Modifier.clickable {
                                 viewModel.removeTodo(item.id)
-                            }
+                            }.padding(end = 10.dp)
                             )
 
                     }
