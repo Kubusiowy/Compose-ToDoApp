@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ import ski.bojar.kurs.android.todoappcompose.data.ToDoViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
-
+    val context = LocalContext.current
     val notDoneTasks = viewModel.todos.filter { !it.isDone }
         Text(text = "Ilosc zadan: ${viewModel.todos.size}")
         LazyColumn(modifier = Modifier.fillMaxSize().padding(15.dp))
@@ -49,7 +50,7 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp).clickable {
-                        viewModel.toggleDone(item.id)
+                        viewModel.toggleDone(item.id,context)
                     },
                     colors = CardDefaults.cardColors(
                         containerColor = item.color.color
@@ -91,7 +92,7 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                         {
                             Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",
                                 modifier = Modifier.clickable {
-                                    viewModel.removeTodo(item.id)
+                                    viewModel.removeTodo(item.id,context)
                                 }.padding(end = 10.dp)
                             )
                         }

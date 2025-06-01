@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -39,7 +40,7 @@ import ski.bojar.kurs.android.todoappcompose.data.ToDoViewModel
 @Composable
 fun AddTaskScreen(navController: NavHostController,viewModel: ToDoViewModel)
 {
-
+val context = LocalContext.current
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
@@ -102,7 +103,7 @@ fun AddTaskScreen(navController: NavHostController,viewModel: ToDoViewModel)
 
            Button(
                onClick = {
-                   viewModel.addTodo(title = title, description = description, color = selectedColor)
+                   viewModel.addTodo(title = title, description = description, color = selectedColor, context = context)
                    navController.popBackStack()
                },
                modifier = Modifier.align(CenterHorizontally)
