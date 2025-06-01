@@ -22,7 +22,8 @@ fun BottomMenu(navController: NavController, currentRoute:String)
     NavigationBar(Modifier.fillMaxWidth().height(80.dp), containerColor = Color.Transparent,) {
         listOf(
             Screens.Home,
-            Screens.AddTask
+            Screens.AddTask,
+            Screens.DoneTask
         ).forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(imageVector = screen.imageVector, contentDescription = screen.Title) },

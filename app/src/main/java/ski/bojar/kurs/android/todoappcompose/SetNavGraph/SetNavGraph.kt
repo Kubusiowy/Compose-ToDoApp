@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ski.bojar.kurs.android.todoappcompose.Screens.AddTaskScreen
+import ski.bojar.kurs.android.todoappcompose.Screens.DoneTaskScreen
 import ski.bojar.kurs.android.todoappcompose.Screens.HomeScreen
 import ski.bojar.kurs.android.todoappcompose.Screens.items.BottomMenuNav.BottomMenu
 import ski.bojar.kurs.android.todoappcompose.Screens.items.BottomMenuNav.TopBar
@@ -48,6 +49,10 @@ fun setNavGraph(navController:NavHostController,viewModel: ToDoViewModel){
                 AddTaskScreen(navController,viewModel)
             }
 
+
+            composable(route = Screens.DoneTask.route) {
+                DoneTaskScreen(viewModel)
+            }
 
         }
     }

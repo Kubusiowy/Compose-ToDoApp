@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,13 +40,17 @@ import ski.bojar.kurs.android.todoappcompose.data.ToDoViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
+
+    val notDoneTasks = viewModel.todos.filter { !it.isDone }
         Text(text = "Ilosc zadan: ${viewModel.todos.size}")
         LazyColumn(modifier = Modifier.fillMaxSize().padding(15.dp))
         {
-            items(viewModel.todos){item->
+            items(notDoneTasks){item->
                 Card(modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(10.dp).clickable {
+                        viewModel.toggleDone(item.id)
+                    },
                     colors = CardDefaults.cardColors(
                         containerColor = item.color.color
                     )
@@ -82,19 +87,21 @@ fun HomeScreen(navController: NavHostController,viewModel: ToDoViewModel) {
                                 modifier = Modifier
                             )
                         }
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",
-                            modifier = Modifier.clickable {
-                                viewModel.removeTodo(item.id)
-                            }.padding(end = 10.dp)
+                        Row()
+                        {
+                            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete",
+                                modifier = Modifier.clickable {
+                                    viewModel.removeTodo(item.id)
+                                }.padding(end = 10.dp)
                             )
+                        }
+
 
                     }
                 }
 
             }
         }
-
-
 
 
 

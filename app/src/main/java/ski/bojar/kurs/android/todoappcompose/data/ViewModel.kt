@@ -37,9 +37,13 @@ class ToDoViewModel:ViewModel()
         todos.removeAll{it.id == id}
     }
 
-    fun toggleDone(id:Int){
-        val item = todos.find { it.id == id }
-        item?.let { it.isDone = !it.isDone }
+    fun toggleDone(id: Int) {
+        val index = todos.indexOfFirst { it.id == id }
+        if (index != -1) {
+            val item = todos[index]
+            val updatedItem = item.copy(isDone = !item.isDone)
+            todos[index] = updatedItem
+        }
     }
 
 }
